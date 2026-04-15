@@ -23,13 +23,12 @@ COMFY_URL = "http://127.0.0.1:8188"
 INPUT_DIR = Path(r"E:\CUMFY_TG\ComfyUI-Easy-Install\ComfyUI\input")
 OUTPUT_DIR = Path(r"E:\CUMFY_TG\ComfyUI-Easy-Install\ComfyUI\output")
 
-WORKFLOW_SINGLE = Path(
-    r"E:\CUMFY_TG\TelegramMiniApp\backend\workflow_single.json"
-)
+from pathlib import Path
 
-WORKFLOW_DOUBLE = Path(
-    r"E:\CUMFY_TG\TelegramMiniApp\backend\workflow_double.json"
-)
+BASE_DIR = Path(__file__).resolve().parent
+
+WORKFLOW_SINGLE = BASE_DIR / "workflow_single.json"
+WORKFLOW_DOUBLE = BASE_DIR / "workflow_double.json"
 
 with open(WORKFLOW_SINGLE, "r", encoding="utf-8") as f:
     BASE_WF_SINGLE = json.load(f)
