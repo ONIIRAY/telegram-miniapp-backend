@@ -1,0 +1,336 @@
+{
+  "9": {
+    "inputs": {
+      "filename_prefix": "Flux2_dev",
+      "images": [
+        "104",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "Save Image"
+    }
+  },
+  "100": {
+    "inputs": {
+      "guidance": 4,
+      "conditioning": [
+        "112",
+        0
+      ]
+    },
+    "class_type": "FluxGuidance",
+    "_meta": {
+      "title": "FluxGuidance"
+    }
+  },
+  "102": {
+    "inputs": {
+      "vae_name": "full_encoder_small_decoder.safetensors"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "Load VAE"
+    }
+  },
+  "104": {
+    "inputs": {
+      "samples": [
+        "133",
+        0
+      ],
+      "vae": [
+        "102",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  },
+  "105": {
+    "inputs": {
+      "width": [
+        "148",
+        0
+      ],
+      "height": [
+        "148",
+        1
+      ],
+      "batch_size": 6
+    },
+    "class_type": "EmptyFlux2LatentImage",
+    "_meta": {
+      "title": "Empty Flux 2 Latent"
+    }
+  },
+  "107": {
+    "inputs": {
+      "text": "nipples",
+      "clip": [
+        "146",
+        0
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Positive Prompt)"
+    }
+  },
+  "112": {
+    "inputs": {
+      "conditioning": [
+        "107",
+        0
+      ],
+      "latent": [
+        "150",
+        0
+      ]
+    },
+    "class_type": "ReferenceLatent",
+    "_meta": {
+      "title": "ReferenceLatent"
+    }
+  },
+  "115": {
+    "inputs": {
+      "upscale_method": "lanczos",
+      "megapixels": [
+        "135",
+        0
+      ],
+      "resolution_steps": 1,
+      "image": [
+        "151",
+        0
+      ]
+    },
+    "class_type": "ImageScaleToTotalPixels",
+    "_meta": {
+      "title": "ImageScaleToTotalPixels"
+    }
+  },
+  "117": {
+    "inputs": {
+      "rgthree_comparer": {
+        "images": [
+          {
+            "name": "A1",
+            "selected": true,
+            "url": "/api/view?filename=rgthree.compare._temp_kukaz_00323_.png&type=temp&subfolder=&rand=0.694078778702175"
+          },
+          {
+            "name": "B1",
+            "selected": true,
+            "url": "/api/view?filename=rgthree.compare._temp_kukaz_00324_.png&type=temp&subfolder=&rand=0.45178428914999313"
+          },
+          {
+            "name": "B2",
+            "selected": false,
+            "url": "/api/view?filename=rgthree.compare._temp_kukaz_00325_.png&type=temp&subfolder=&rand=0.27065175532953145"
+          },
+          {
+            "name": "B3",
+            "selected": false,
+            "url": "/api/view?filename=rgthree.compare._temp_kukaz_00326_.png&type=temp&subfolder=&rand=0.3293725836275373"
+          },
+          {
+            "name": "B4",
+            "selected": false,
+            "url": "/api/view?filename=rgthree.compare._temp_kukaz_00327_.png&type=temp&subfolder=&rand=0.8420519044298509"
+          },
+          {
+            "name": "B5",
+            "selected": false,
+            "url": "/api/view?filename=rgthree.compare._temp_kukaz_00328_.png&type=temp&subfolder=&rand=0.16843428096110324"
+          },
+          {
+            "name": "B6",
+            "selected": false,
+            "url": "/api/view?filename=rgthree.compare._temp_kukaz_00329_.png&type=temp&subfolder=&rand=0.49233057651871504"
+          }
+        ]
+      },
+      "image_a": [
+        "149",
+        0
+      ],
+      "image_b": [
+        "104",
+        0
+      ]
+    },
+    "class_type": "Image Comparer (rgthree)",
+    "_meta": {
+      "title": "Image Comparer (rgthree)"
+    }
+  },
+  "125": {
+    "inputs": {
+      "pixels": [
+        "115",
+        0
+      ],
+      "vae": [
+        "102",
+        0
+      ]
+    },
+    "class_type": "VAEEncode",
+    "_meta": {
+      "title": "VAE Encode"
+    }
+  },
+  "126": {
+    "inputs": {
+      "unet_name": "2flux9bklein\\flux-2-klein-9b-nvfp4.safetensors",
+      "weight_dtype": "default"
+    },
+    "class_type": "UNETLoader",
+    "_meta": {
+      "title": "Load Diffusion Model"
+    }
+  },
+  "133": {
+    "inputs": {
+      "seed": 765438939638976,
+      "steps": 4,
+      "cfg": 1,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 1,
+      "model": [
+        "126",
+        0
+      ],
+      "positive": [
+        "100",
+        0
+      ],
+      "negative": [
+        "152",
+        0
+      ],
+      "latent_image": [
+        "105",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "KSampler"
+    }
+  },
+  "135": {
+    "inputs": {
+      "value": 1
+    },
+    "class_type": "PrimitiveFloat",
+    "_meta": {
+      "title": "Float (Set Megapixels)"
+    }
+  },
+  "146": {
+    "inputs": {
+      "clip_name": "qwen_3_8b_fp8mixed.safetensors",
+      "type": "flux2",
+      "device": "default"
+    },
+    "class_type": "CLIPLoader",
+    "_meta": {
+      "title": "Load CLIP"
+    }
+  },
+  "147": {
+    "inputs": {
+      "samples": [
+        "125",
+        0
+      ],
+      "vae": [
+        "102",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  },
+  "148": {
+    "inputs": {
+      "image": [
+        "147",
+        0
+      ]
+    },
+    "class_type": "GetImageSize",
+    "_meta": {
+      "title": "Get Image Size"
+    }
+  },
+  "149": {
+    "inputs": {
+      "upscale_method": "lanczos",
+      "width": [
+        "148",
+        0
+      ],
+      "height": [
+        "148",
+        1
+      ],
+      "crop": "center",
+      "image": [
+        "151",
+        0
+      ]
+    },
+    "class_type": "ImageScale",
+    "_meta": {
+      "title": "Upscale Image"
+    }
+  },
+  "150": {
+    "inputs": {
+      "pixels": [
+        "149",
+        0
+      ],
+      "vae": [
+        "102",
+        0
+      ]
+    },
+    "class_type": "VAEEncode",
+    "_meta": {
+      "title": "VAE Encode"
+    }
+  },
+  "151": {
+    "inputs": {
+      "image": "IMG_20260415_155323_541.jpg"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load Image"
+    }
+  },
+  "152": {
+    "inputs": {
+      "text": "nude, naked, topless, nipples, breast, areola, exposed chest, exposed body, explicit, nsfw, erotic, sexy pose, porn, lingerie, underwear, bra, panties, transparent clothes, see-through clothes, bikini, swimsuit, cleavage, seductive pose, revealing outfit, sexualized body, fetish, erotic lighting, sensual pose, skin exposure, low clothes coverage, exposed shoulders, exposed torso",
+      "clip": [
+        "146",
+        0
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode NEGATIVE"
+    }
+  }
+}
